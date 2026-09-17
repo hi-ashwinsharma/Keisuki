@@ -3,11 +3,11 @@ package com.hiashwinsharma.keisuki.data.sync
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.google.firebase.auth.FirebaseAuth
+import com.hiashwinsharma.keisuki.core.model.SyncStatus
 import com.hiashwinsharma.keisuki.data.local.AppDatabase
 import com.hiashwinsharma.keisuki.data.local.CounterEntity
 import com.hiashwinsharma.keisuki.data.remote.FirestoreService
-import com.hiashwinsharma.keisuki.model.SyncStatus
-import com.google.firebase.auth.FirebaseAuth
 
 class SyncWorker(
     appContext: Context,

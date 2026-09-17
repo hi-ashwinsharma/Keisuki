@@ -1,10 +1,10 @@
 package com.hiashwinsharma.keisuki.data.remote
 
-import com.hiashwinsharma.keisuki.model.ColorToken
-import com.hiashwinsharma.keisuki.model.Counter
-import com.hiashwinsharma.keisuki.model.SyncStatus
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.hiashwinsharma.keisuki.core.model.ColorToken
+import com.hiashwinsharma.keisuki.core.model.Counter
+import com.hiashwinsharma.keisuki.core.model.SyncStatus
 import kotlinx.coroutines.tasks.await
 
 class FirestoreService(

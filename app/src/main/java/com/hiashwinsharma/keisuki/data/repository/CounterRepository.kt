@@ -1,12 +1,12 @@
 package com.hiashwinsharma.keisuki.data.repository
 
+import com.hiashwinsharma.keisuki.core.model.ColorToken
+import com.hiashwinsharma.keisuki.core.model.Counter
+import com.hiashwinsharma.keisuki.core.model.SyncStatus
 import com.hiashwinsharma.keisuki.data.auth.AuthRepository
 import com.hiashwinsharma.keisuki.data.local.CounterDao
 import com.hiashwinsharma.keisuki.data.local.CounterEntity
 import com.hiashwinsharma.keisuki.data.sync.SyncScheduler
-import com.hiashwinsharma.keisuki.model.ColorToken
-import com.hiashwinsharma.keisuki.model.Counter
-import com.hiashwinsharma.keisuki.model.SyncStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -61,29 +61,24 @@ class CounterRepository(
             updatedAt = now,
             syncStatus = SyncStatus.PENDING_SYNC
         )
-
         counterDao.upsert(CounterEntity.fromDomain(newCounter))
         syncScheduler.triggerImmediateSync()
         return newCounter
     }
 
-    suspend fun increment(id: String, customStep: Long? = null) {
+    suspend fun incrementCounter(id: String, step: Long = 1L) {
         val now = System.currentTimeMillis()
-        val counter = counterDao.getCounterById(id) ?: return
-        val step = customStep ?: counter.step
         counterDao.incrementCounter(id = id, step = step, updatedAt = now)
         syncScheduler.triggerImmediateSync()
     }
 
-    suspend fun decrement(id: String, customStep: Long? = null) {
+    suspend fun decrementCounter(id: String, step: Long = 1L) {
         val now = System.currentTimeMillis()
-        val counter = counterDao.getCounterById(id) ?: return
-        val step = customStep ?: counter.step
         counterDao.decrementCounter(id = id, step = step, updatedAt = now)
         syncScheduler.triggerImmediateSync()
     }
 
-    suspend fun reset(id: String) {
+    suspend fun resetCounter(id: String) {
         val now = System.currentTimeMillis()
         counterDao.resetCounter(id = id, updatedAt = now)
         syncScheduler.triggerImmediateSync()
@@ -97,33 +92,34 @@ class CounterRepository(
 
     suspend fun updateCounter(
         id: String,
-        title: String,
-        count: Long,
-        step: Long,
-        colorToken: ColorToken
+        title: String? = null,
+        count: Long? = null,
+        step: Long? = null,
+        colorToken: ColorToken? = null
     ) {
         val existing = counterDao.getCounterById(id) ?: return
-        val updated = existing.copy(
-            title = title.trim().ifEmpty { existing.title },
-            count = count,
-            step = step.coerceAtLeast(1L),
-            colorToken = colorToken.id,
-            createdAt = if (existing.createdAt > 0L) existing.createdAt else existing.updatedAt,
+        val currentDomain = existing.toDomain()
+        val updatedDomain = currentDomain.copy(
+            title = title?.trim()?.ifEmpty { currentDomain.title } ?: currentDomain.title,
+            count = count ?: currentDomain.count,
+            step = step?.coerceAtLeast(1L) ?: currentDomain.step,
+            colorToken = colorToken ?: currentDomain.colorToken,
             updatedAt = System.currentTimeMillis(),
             syncStatus = SyncStatus.PENDING_SYNC
         )
-        counterDao.upsert(updated)
+        counterDao.update(CounterEntity.fromDomain(updatedDomain))
         syncScheduler.triggerImmediateSync()
     }
 
-    suspend fun delete(id: String) {
+    suspend fun deleteCounter(id: String) {
         val now = System.currentTimeMillis()
         counterDao.markForDeletion(id = id, updatedAt = now)
         syncScheduler.triggerImmediateSync()
     }
 
-    suspend fun onUserSignedIn(newUserId: String) {
-        counterDao.associateAnonymousCounters(newUserId)
+    suspend fun associateAnonymousDataOnSignIn(userId: String) {
+        val now = System.currentTimeMillis()
+        counterDao.associateAnonymousCounters(newUserId = userId, updatedAt = now)
         syncScheduler.triggerImmediateSync()
     }
 }

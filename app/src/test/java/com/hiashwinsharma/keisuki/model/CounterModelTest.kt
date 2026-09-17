@@ -1,5 +1,8 @@
 package com.hiashwinsharma.keisuki.model
 
+import com.hiashwinsharma.keisuki.core.model.ColorToken
+import com.hiashwinsharma.keisuki.core.model.Counter
+import com.hiashwinsharma.keisuki.core.model.SyncStatus
 import com.hiashwinsharma.keisuki.data.local.CounterEntity
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -1,7 +1,7 @@
 package com.hiashwinsharma.keisuki.data.local
 
 import androidx.room.TypeConverter
-import com.hiashwinsharma.keisuki.model.SyncStatus
+import com.hiashwinsharma.keisuki.core.model.SyncStatus
 
 class SyncStatusConverter {
     @TypeConverter

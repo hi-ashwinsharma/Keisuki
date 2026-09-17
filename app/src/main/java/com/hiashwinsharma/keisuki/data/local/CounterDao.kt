@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.hiashwinsharma.keisuki.model.SyncStatus
+import com.hiashwinsharma.keisuki.core.model.SyncStatus
 import kotlinx.coroutines.flow.Flow
 
 @Dao

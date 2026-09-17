@@ -3,9 +3,9 @@ package com.hiashwinsharma.keisuki.data.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.hiashwinsharma.keisuki.model.ColorToken
-import com.hiashwinsharma.keisuki.model.Counter
-import com.hiashwinsharma.keisuki.model.SyncStatus
+import com.hiashwinsharma.keisuki.core.model.ColorToken
+import com.hiashwinsharma.keisuki.core.model.Counter
+import com.hiashwinsharma.keisuki.core.model.SyncStatus
 
 @Entity(tableName = "counters")
 data class CounterEntity(

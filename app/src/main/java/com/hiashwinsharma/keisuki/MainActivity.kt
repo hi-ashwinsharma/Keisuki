@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
-import com.hiashwinsharma.keisuki.ui.components.LocalHapticIntensity
-import com.hiashwinsharma.keisuki.ui.navigation.AppNavGraph
-import com.hiashwinsharma.keisuki.ui.theme.KeisukiTheme
+import com.hiashwinsharma.keisuki.core.designsystem.KeisukiTheme
+import com.hiashwinsharma.keisuki.core.designsystem.LocalHapticIntensity
+import com.hiashwinsharma.keisuki.navigation.KeisukiNavHost
 
 class MainActivity : ComponentActivity() {
 
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                         color = MaterialTheme.colorScheme.background
                     ) {
                         val navController = rememberNavController()
-                        AppNavGraph(
+                        KeisukiNavHost(
                             navController = navController,
                             app = app,
                             onSetKeyHandler = { handler -> setVolumeKeyHandler(handler) },

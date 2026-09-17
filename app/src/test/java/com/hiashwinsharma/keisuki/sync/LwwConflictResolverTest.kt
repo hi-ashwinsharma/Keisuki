@@ -1,7 +1,7 @@
 package com.hiashwinsharma.keisuki.sync
 
-import com.hiashwinsharma.keisuki.model.Counter
-import com.hiashwinsharma.keisuki.model.SyncStatus
+import com.hiashwinsharma.keisuki.core.model.Counter
+import com.hiashwinsharma.keisuki.core.model.SyncStatus
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
