@@ -13,5 +13,6 @@ sealed interface FocusUiAction {
         val colorToken: ColorToken
     ) : FocusUiAction
     data class OnDelete(val onDeleted: () -> Unit) : FocusUiAction
+    data object OnHistoryClick : FocusUiAction
     data object OnBackClick : FocusUiAction
 }

@@ -21,6 +21,7 @@ fun NavController.navigateToFocus(counterId: String, navOptions: NavOptions? = n
 fun NavGraphBuilder.focusScreen(
     app: KeisukiApp,
     onBack: () -> Unit,
+    onHistoryClick: (String) -> Unit = {},
     onSetKeyHandler: (((Int) -> Boolean)?) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
@@ -39,6 +40,7 @@ fun NavGraphBuilder.focusScreen(
         FocusRoute(
             viewModel = focusViewModel,
             onBack = onBack,
+            onHistoryClick = onHistoryClick,
             onSetKeyHandler = onSetKeyHandler,
             modifier = modifier
         )

@@ -15,6 +15,7 @@ import com.hiashwinsharma.keisuki.core.designsystem.rememberExpressiveHaptics
 fun FocusRoute(
     viewModel: FocusViewModel,
     onBack: () -> Unit,
+    onHistoryClick: (String) -> Unit = {},
     onSetKeyHandler: (((Int) -> Boolean)?) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
@@ -63,6 +64,9 @@ fun FocusRoute(
         onAction = { action ->
             when (action) {
                 is FocusUiAction.OnBackClick -> onBack()
+                is FocusUiAction.OnHistoryClick -> {
+                    counter?.let { onHistoryClick(it.id) }
+                }
                 else -> viewModel.onAction(action)
             }
         },

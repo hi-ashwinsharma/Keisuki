@@ -32,11 +32,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CloudSync
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -216,6 +218,17 @@ fun FocusScreen(
                                 modifier = Modifier
                                     .padding(end = 8.dp)
                                     .size(20.dp)
+                            )
+                        }
+
+                        IconButton(onClick = {
+                            haptics.tick()
+                            onAction(FocusUiAction.OnHistoryClick)
+                        }) {
+                            Icon(
+                                imageVector = Icons.Outlined.CalendarMonth,
+                                contentDescription = "Calendar History",
+                                tint = MaterialTheme.colorScheme.onBackground
                             )
                         }
 

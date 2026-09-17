@@ -14,6 +14,7 @@ sealed interface HomeUiAction {
         val colorToken: ColorToken
     ) : HomeUiAction
     data class OnSetSortOrder(val order: CounterSortOrder) : HomeUiAction
+    data object OnHistoryClick : HomeUiAction
     data object OnSettingsClick : HomeUiAction
     data class OnSignInWithGoogle(val webClientId: String) : HomeUiAction
     data object OnSignOut : HomeUiAction

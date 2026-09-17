@@ -16,6 +16,8 @@ import androidx.navigation.compose.NavHost
 import com.hiashwinsharma.keisuki.KeisukiApp
 import com.hiashwinsharma.keisuki.feature.focus.navigation.focusScreen
 import com.hiashwinsharma.keisuki.feature.focus.navigation.navigateToFocus
+import com.hiashwinsharma.keisuki.feature.history.navigation.historyScreen
+import com.hiashwinsharma.keisuki.feature.history.navigation.navigateToHistory
 import com.hiashwinsharma.keisuki.feature.home.navigation.HOME_ROUTE
 import com.hiashwinsharma.keisuki.feature.home.navigation.homeScreen
 import com.hiashwinsharma.keisuki.feature.settings.navigation.navigateToSettings
@@ -58,6 +60,9 @@ fun KeisukiNavHost(
             },
             onSettingsClick = {
                 navController.navigateToSettings()
+            },
+            onHistoryClick = {
+                navController.navigateToHistory("all")
             }
         )
 
@@ -69,7 +74,15 @@ fun KeisukiNavHost(
         focusScreen(
             app = app,
             onBack = { navController.popBackStack() },
+            onHistoryClick = { counterId ->
+                navController.navigateToHistory(counterId)
+            },
             onSetKeyHandler = onSetKeyHandler
+        )
+
+        historyScreen(
+            app = app,
+            onBack = { navController.popBackStack() }
         )
     }
 }

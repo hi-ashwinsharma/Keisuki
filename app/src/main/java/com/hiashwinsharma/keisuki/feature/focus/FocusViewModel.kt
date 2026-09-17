@@ -40,6 +40,7 @@ class FocusViewModel(
                 colorToken = action.colorToken
             )
             is FocusUiAction.OnDelete -> deleteCounter(action.onDeleted)
+            is FocusUiAction.OnHistoryClick -> Unit
             is FocusUiAction.OnBackClick -> Unit
         }
     }

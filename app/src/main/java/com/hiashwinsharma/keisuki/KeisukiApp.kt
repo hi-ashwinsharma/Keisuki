@@ -33,6 +33,7 @@ class KeisukiApp : Application() {
         syncScheduler = SyncScheduler(this)
         counterRepository = CounterRepository(
             counterDao = database.counterDao(),
+            counterEventDao = database.counterEventDao(),
             authRepository = authRepository,
             syncScheduler = syncScheduler
         )

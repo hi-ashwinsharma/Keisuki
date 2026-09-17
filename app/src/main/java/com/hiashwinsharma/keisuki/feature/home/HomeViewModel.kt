@@ -68,6 +68,7 @@ class HomeViewModel(
         when (action) {
             is HomeUiAction.OnCounterClick -> Unit
             is HomeUiAction.OnSettingsClick -> Unit
+            is HomeUiAction.OnHistoryClick -> Unit
             is HomeUiAction.OnIncrement -> increment(action.counterId)
             is HomeUiAction.OnDecrement -> decrement(action.counterId)
             is HomeUiAction.OnCreateCounter -> createCounter(

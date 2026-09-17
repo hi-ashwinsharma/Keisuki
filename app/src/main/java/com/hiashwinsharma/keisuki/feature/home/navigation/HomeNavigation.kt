@@ -20,6 +20,7 @@ fun NavGraphBuilder.homeScreen(
     app: KeisukiApp,
     onCounterClick: (String) -> Unit,
     onSettingsClick: () -> Unit,
+    onHistoryClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     composable(route = HOME_ROUTE) {
@@ -34,6 +35,7 @@ fun NavGraphBuilder.homeScreen(
             viewModel = homeViewModel,
             onCounterClick = onCounterClick,
             onSettingsClick = onSettingsClick,
+            onHistoryClick = onHistoryClick,
             modifier = modifier
         )
     }

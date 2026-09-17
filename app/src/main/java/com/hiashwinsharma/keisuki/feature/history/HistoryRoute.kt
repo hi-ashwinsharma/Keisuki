@@ -1,4 +1,4 @@
-package com.hiashwinsharma.keisuki.feature.home
+package com.hiashwinsharma.keisuki.feature.history
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -6,22 +6,18 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun HomeRoute(
-    viewModel: HomeViewModel,
-    onCounterClick: (String) -> Unit,
-    onSettingsClick: () -> Unit,
-    onHistoryClick: () -> Unit = {},
+fun HistoryRoute(
+    viewModel: HistoryViewModel,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    HomeScreen(
+    HistoryScreen(
         uiState = uiState,
         onAction = { action ->
             when (action) {
-                is HomeUiAction.OnCounterClick -> onCounterClick(action.counterId)
-                is HomeUiAction.OnSettingsClick -> onSettingsClick()
-                is HomeUiAction.OnHistoryClick -> onHistoryClick()
+                is HistoryUiAction.OnBackClick -> onBack()
                 else -> viewModel.onAction(action)
             }
         },

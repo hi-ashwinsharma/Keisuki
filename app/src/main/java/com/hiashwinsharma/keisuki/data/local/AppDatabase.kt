@@ -8,14 +8,15 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
-    entities = [CounterEntity::class],
-    version = 2,
+    entities = [CounterEntity::class, CounterEventEntity::class],
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(SyncStatusConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun counterDao(): CounterDao
+    abstract fun counterEventDao(): CounterEventDao
 
     companion object {
         @Volatile
