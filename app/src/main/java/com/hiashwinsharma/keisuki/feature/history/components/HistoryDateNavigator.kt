@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +30,7 @@ import com.hiashwinsharma.keisuki.core.designsystem.calculateExpressiveShapes
 import com.hiashwinsharma.keisuki.core.designsystem.rememberExpressiveHaptics
 import com.hiashwinsharma.keisuki.feature.history.DateRangeMode
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HistoryDateNavigator(
     selectedMode: DateRangeMode,
@@ -47,30 +50,34 @@ fun HistoryDateNavigator(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Range mode selector chips
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        // Range mode selector - Material 3 Segmented Button Group
+        SingleChoiceSegmentedButtonRow(
+            modifier = Modifier.fillMaxWidth()
         ) {
-            DateRangeMode.entries.forEach { mode ->
+            DateRangeMode.entries.forEachIndexed { index, mode ->
                 val isSelected = selectedMode == mode
-                FilterChip(
+                SegmentedButton(
                     selected = isSelected,
                     onClick = {
                         haptics.pop()
                         onSelectMode(mode)
                     },
+                    shape = SegmentedButtonDefaults.itemShape(
+                        index = index,
+                        count = DateRangeMode.entries.size
+                    ),
+                    colors = SegmentedButtonDefaults.colors(
+                        activeContainerColor = primaryThemeColor,
+                        activeContentColor = MaterialTheme.colorScheme.onPrimary,
+                        inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        inactiveContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    ),
                     label = {
                         Text(
                             text = mode.label,
                             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
                         )
-                    },
-                    shape = shapes.small,
-                    colors = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = primaryThemeColor,
-                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary
-                    )
+                    }
                 )
             }
         }
