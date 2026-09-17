@@ -53,7 +53,7 @@ fun HomeTopBar(
     var showSortMenu by remember { mutableStateOf(false) }
 
     TopAppBar(
-        modifier = modifier,
+        modifier = modifier.padding(end = 10.dp),
         title = {
             Column {
                 Text(
@@ -123,17 +123,17 @@ fun HomeTopBar(
                 Icon(Icons.Outlined.CalendarMonth, contentDescription = "Calendar History", tint = MaterialTheme.colorScheme.onSurface, modifier = Modifier.size(22.dp))
             }
 
+            IconButton(onClick = { haptics.tick(); onSettingsClick() }, modifier = Modifier.size(36.dp)) {
+                Icon(Icons.Outlined.Settings, contentDescription = "Settings", tint = MaterialTheme.colorScheme.onSurface, modifier = Modifier.size(22.dp))
+            }
+
             IconButton(onClick = { haptics.tick(); onAuthClick() }, modifier = Modifier.size(36.dp)) {
                 Icon(
                     imageVector = if (authState.isAuthenticated) Icons.Default.AccountCircle else Icons.Outlined.AccountCircle,
                     contentDescription = "Account",
-                    tint = if (authState.isAuthenticated) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                    tint = if (authState.isAuthenticated) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.error,
                     modifier = Modifier.size(22.dp)
                 )
-            }
-
-            IconButton(onClick = { haptics.tick(); onSettingsClick() }, modifier = Modifier.size(36.dp)) {
-                Icon(Icons.Outlined.Settings, contentDescription = "Settings", tint = MaterialTheme.colorScheme.onSurface, modifier = Modifier.size(22.dp))
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
