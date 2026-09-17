@@ -83,8 +83,8 @@ fun LazyListScope.historyActivityLogSection(
 }
 
 fun calculateGroupedNotificationShape(index: Int, total: Int, radius: Dp): RoundedCornerShape {
-    val r = (radius.value * 0.75f).coerceAtLeast(8f).dp
-    val sm = (radius.value * 0.15f).coerceIn(2f, 4f).dp
+    val r = radius
+    val sm = (radius.value * 0.15f).coerceAtLeast(0f).dp
     return when {
         total <= 1 -> RoundedCornerShape(r)
         index == 0 -> RoundedCornerShape(topStart = r, topEnd = r, bottomStart = sm, bottomEnd = sm)

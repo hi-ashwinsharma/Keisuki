@@ -64,7 +64,8 @@ fun HistoryDateNavigator(
                     },
                     shape = SegmentedButtonDefaults.itemShape(
                         index = index,
-                        count = DateRangeMode.entries.size
+                        count = DateRangeMode.entries.size,
+                        baseShape = androidx.compose.foundation.shape.RoundedCornerShape(cornerRadius)
                     ),
                     colors = SegmentedButtonDefaults.colors(
                         activeContainerColor = primaryThemeColor,

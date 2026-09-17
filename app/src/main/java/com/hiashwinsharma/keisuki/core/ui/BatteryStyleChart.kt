@@ -119,8 +119,9 @@ fun BatteryStyleChart(
                 exit = fadeOut()
             ) {
                 scrubbedPoint?.let { sp ->
+                    val appRadius = com.hiashwinsharma.keisuki.core.designsystem.LocalAppCornerRadius.current
                     Surface(
-                        shape = RoundedCornerShape(12.dp),
+                        shape = com.hiashwinsharma.keisuki.core.designsystem.calculateExpressiveShapes(appRadius).small,
                         color = primaryColor.copy(alpha = 0.16f),
                         modifier = Modifier.padding(bottom = 4.dp)
                     ) {
