@@ -1,17 +1,15 @@
 package com.hiashwinsharma.keisuki.feature.history.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -27,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hiashwinsharma.keisuki.core.designsystem.rememberExpressiveHaptics
@@ -74,7 +73,6 @@ fun CounterPickerBottomSheet(
             ) {
                 itemsIndexed(availableCounters, key = { _, it -> it.id }) { index, counter ->
                     val isSelected = selectedCounterId == counter.id
-                    val counterColor = if (counter.colorToken.isCustomColor) counter.colorToken.primaryColor else MaterialTheme.colorScheme.primary
                     val shape = calculateGroupedNotificationShape(index, totalCounters, cornerRadius)
 
                     Surface(
@@ -96,36 +94,12 @@ fun CounterPickerBottomSheet(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            // Left: Color indicator dot + Counter Title
+                            // Left: Check Icon (when selected) or spacing + Counter Title
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                modifier = Modifier.weight(1f, fill = false)
                             ) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(12.dp)
-                                        .clip(CircleShape)
-                                        .background(counterColor)
-                                )
-                                Text(
-                                    text = counter.title,
-                                    style = MaterialTheme.typography.bodyLarge.copy(
-                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
-                                    ),
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-                            }
-
-                            // Mid/Right: Count & Selection Check
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                Text(
-                                    text = "${counter.count}",
-                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
                                 if (isSelected) {
                                     Icon(
                                         imageVector = Icons.Default.Check,
@@ -133,8 +107,26 @@ fun CounterPickerBottomSheet(
                                         tint = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.size(20.dp)
                                     )
+                                } else {
+                                    Spacer(modifier = Modifier.size(20.dp))
                                 }
+                                Text(
+                                    text = counter.title,
+                                    style = MaterialTheme.typography.bodyLarge.copy(
+                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
+                                    ),
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
                             }
+
+                            // Right: Count
+                            Text(
+                                text = "${counter.count}",
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
                         }
                     }
                 }

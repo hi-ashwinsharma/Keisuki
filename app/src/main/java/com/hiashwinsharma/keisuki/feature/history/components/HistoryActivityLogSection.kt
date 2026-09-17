@@ -32,50 +32,50 @@ fun LazyListScope.historyActivityLogSection(
     cornerRadius: Dp
 ) {
     item {
-        Text(
-            text = "Activity Log (${events.size})",
-            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(top = 8.dp)
-        )
-    }
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Text(
+                text = "Activity Log (${events.size})",
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
-    if (events.isEmpty()) {
-        item {
-            Card(
-                shape = calculateExpressiveShapes(cornerRadius).medium,
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-                ),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(24.dp),
-                    contentAlignment = Alignment.Center
+            if (events.isEmpty()) {
+                Card(
+                    shape = calculateExpressiveShapes(cornerRadius).medium,
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+                    ),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(
-                        text = "No events logged for $counterTitle in this period.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(24.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "No events logged for $counterTitle in this period.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
-            }
-        }
-    } else {
-        item {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(2.dp)
-            ) {
-                val totalEvents = events.size
-                events.forEachIndexed { index, event ->
-                    NotificationStackLogRow(
-                        event = event,
-                        shape = calculateGroupedNotificationShape(index, totalEvents, cornerRadius),
-                        cornerRadius = cornerRadius
-                    )
+            } else {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                ) {
+                    val totalEvents = events.size
+                    events.forEachIndexed { index, event ->
+                        NotificationStackLogRow(
+                            event = event,
+                            shape = calculateGroupedNotificationShape(index, totalEvents, cornerRadius),
+                            cornerRadius = cornerRadius
+                        )
+                    }
                 }
             }
         }
@@ -130,18 +130,12 @@ fun NotificationStackLogRow(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            // 1. LEFT: Count Change Delta Badge
-            Surface(
-                shape = calculateExpressiveShapes(cornerRadius).extraSmall,
-                color = deltaColor.copy(alpha = 0.14f)
-            ) {
-                Text(
-                    text = deltaText,
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                    color = deltaColor,
-                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                )
-            }
+            // 1. LEFT: Bold, colored count delta text (no chip wrapper)
+            Text(
+                text = deltaText,
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                color = deltaColor
+            )
 
             // 2. MID: New Total Value
             Row(
