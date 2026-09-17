@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Keisuki</string>
+    <string name="add_counter">Add Counter</string>
+    <string name="edit_counter">Edit Counter</string>
+    <string name="counter_title">Counter Title</string>
+    <string name="initial_value">Initial Value</string>
+    <string name="step_size">Step Size</string>
+    <string name="color_theme">Color Theme</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="reset">Reset</string>
+    <string name="sign_in_google">Sign in with Google</string>
+    <string name="sign_in_to_backup">Sign in to back up</string>
+    <string name="signed_in_as">Signed in as %1$s</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="synced">All changes synced</string>
+    <string name="sync_pending">Sync pending…</string>
+    <string name="offline_mode">Guest / Offline mode</string>
+    <string name="no_counters_title">No counters yet</string>
+    <string name="no_counters_desc">Tap the expressive \'+\' button to create your first counter!</string>
+    <string name="google_web_client_id" translatable="false">755718906182-0kli9ams5n7k886ok8ro3v3rmku63o0r.apps.googleusercontent.com</string>
+</resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "755718906182",
+    "project_id": "keisuki-hiashwinsharma",
+    "storage_bucket": "keisuki-hiashwinsharma.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755718906182:android:7012310e8959244fe34547",
+        "android_client_info": {
+          "package_name": "com.hiashwinsharma.keisuki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755718906182-8pcmqrfmetgtvtc9s487uks2rnl1vr36.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hiashwinsharma.keisuki",
+            "certificate_hash": "e2a31b5789d92e1df597e6d3a3d17738797c233c"
+          }
+        },
+        {
+          "client_id": "755718906182-r8a1hb6u9vhrenvri2pp6kqti9ea1r2o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hiashwinsharma.keisuki",
+            "certificate_hash": "fc82fc8d14e3601581f6d5bc3cdf275031953a38"
+          }
+        },
+        {
+          "client_id": "755718906182-0kli9ams5n7k886ok8ro3v3rmku63o0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtHdHs18cPFVXswqZrcBU2YH5rDkR8WiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755718906182-0kli9ams5n7k886ok8ro3v3rmku63o0r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
