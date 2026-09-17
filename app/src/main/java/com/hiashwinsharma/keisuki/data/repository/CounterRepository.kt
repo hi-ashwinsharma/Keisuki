@@ -6,6 +6,8 @@ import com.hiashwinsharma.keisuki.core.model.SyncStatus
 import com.hiashwinsharma.keisuki.data.auth.AuthRepository
 import com.hiashwinsharma.keisuki.data.local.CounterDao
 import com.hiashwinsharma.keisuki.data.local.CounterEntity
+import com.hiashwinsharma.keisuki.data.local.CounterEventDao
+import com.hiashwinsharma.keisuki.data.local.CounterEventEntity
 import com.hiashwinsharma.keisuki.data.sync.SyncScheduler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,9 +15,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.UUID
-
-import com.hiashwinsharma.keisuki.data.local.CounterEventDao
-import com.hiashwinsharma.keisuki.data.local.CounterEventEntity
 
 class CounterRepository(
     private val counterDao: CounterDao,
@@ -34,10 +33,6 @@ class CounterRepository(
         }
     }
 
-    /**
-     * SSOT: The UI observes the Room database exclusively.
-     * Pending deletes are filtered out in DAO query so UI reflects deletions immediately.
-     */
     val countersFlow: Flow<List<Counter>> = counterDao.getAllActiveCounters().map { entities ->
         entities.map { it.toDomain() }
     }
@@ -95,7 +90,7 @@ class CounterRepository(
                 eventType = "CREATE"
             )
         )
-        syncScheduler.triggerImmediateSync()
+        syncScheduler.scheduleDebouncedSync()
         return newCounter
     }
 
@@ -114,7 +109,7 @@ class CounterRepository(
                 )
             )
         }
-        syncScheduler.triggerImmediateSync()
+        syncScheduler.scheduleDebouncedSync()
     }
 
     suspend fun decrementCounter(id: String, step: Long = 1L) {
@@ -132,7 +127,7 @@ class CounterRepository(
                 )
             )
         }
-        syncScheduler.triggerImmediateSync()
+        syncScheduler.scheduleDebouncedSync()
     }
 
     suspend fun resetCounter(id: String) {
@@ -149,7 +144,7 @@ class CounterRepository(
                 eventType = "RESET"
             )
         )
-        syncScheduler.triggerImmediateSync()
+        syncScheduler.scheduleDebouncedSync()
     }
 
     suspend fun resetAllCounters() {
@@ -168,7 +163,7 @@ class CounterRepository(
                 )
             )
         }
-        syncScheduler.triggerImmediateSync()
+        syncScheduler.scheduleDebouncedSync()
     }
 
     suspend fun updateCounter(
@@ -205,7 +200,7 @@ class CounterRepository(
                 )
             )
         }
-        syncScheduler.triggerImmediateSync()
+        syncScheduler.scheduleDebouncedSync()
     }
 
     suspend fun deleteCounter(id: String) {
