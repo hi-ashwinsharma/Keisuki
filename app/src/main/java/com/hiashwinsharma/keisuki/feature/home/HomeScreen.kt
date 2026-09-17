@@ -1,71 +1,33 @@
 package com.hiashwinsharma.keisuki.feature.home
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Sort
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.CloudSync
-import androidx.compose.material.icons.filled.InvertColors
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.CalendarMonth
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.hiashwinsharma.keisuki.R
 import com.hiashwinsharma.keisuki.core.designsystem.LocalAppCornerRadius
 import com.hiashwinsharma.keisuki.core.designsystem.rememberExpressiveHaptics
 import com.hiashwinsharma.keisuki.core.model.ColorToken
-import com.hiashwinsharma.keisuki.core.ui.BentoCounterCard
-import com.hiashwinsharma.keisuki.data.preferences.CounterSortOrder
-import com.hiashwinsharma.keisuki.data.preferences.GridLayoutMode
 import com.hiashwinsharma.keisuki.feature.auth.AuthBottomSheet
 import com.hiashwinsharma.keisuki.feature.home.components.AddCounterBottomSheet
+import com.hiashwinsharma.keisuki.feature.home.components.HomeCounterGrid
+import com.hiashwinsharma.keisuki.feature.home.components.HomeEmptyState
+import com.hiashwinsharma.keisuki.feature.home.components.HomeTopBar
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     uiState: HomeUiState,
@@ -77,285 +39,57 @@ fun HomeScreen(
 
     var showAddDialog by remember { mutableStateOf(false) }
     var showAuthSheet by remember { mutableStateOf(false) }
-    var showSortMenu by remember { mutableStateOf(false) }
-
     val webClientId = stringResource(id = R.string.google_web_client_id)
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            TopAppBar(
-                title = {
-                    Column {
-                        Text(
-                            text = "Keisuki",
-                            style = MaterialTheme.typography.headlineMedium.copy(
-                                fontWeight = FontWeight.Black,
-                                letterSpacing = (-0.5).sp
-                            ),
-                            color = MaterialTheme.colorScheme.onBackground
-                        )
-                        Text(
-                            text = if (uiState.authState.isAuthenticated) {
-                                uiState.authState.displayName
-                            } else {
-                                "Offline Mode"
-                            },
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                },
-                actions = {
-                    if (uiState.isSyncPending) {
-                        IconButton(
-                            onClick = {
-                                haptics.tick()
-                                showAuthSheet = true
-                            },
-                            modifier = Modifier.size(36.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.CloudSync,
-                                contentDescription = "Syncing",
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(4.dp))
-                    }
-
-                    // Sort Action Button & Menu
-                    Box {
-                        IconButton(
-                            onClick = {
-                                haptics.tick()
-                                showSortMenu = true
-                            },
-                            modifier = Modifier.size(36.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.Sort,
-                                contentDescription = "Sort counters",
-                                tint = MaterialTheme.colorScheme.onSurface,
-                                modifier = Modifier.size(22.dp)
-                            )
-                        }
-
-                        DropdownMenu(
-                            expanded = showSortMenu,
-                            onDismissRequest = { showSortMenu = false },
-                            shape = RoundedCornerShape(16.dp),
-                            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-                        ) {
-                            Text(
-                                text = "Sort By",
-                                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                                color = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-                            )
-                            CounterSortOrder.entries.forEach { order ->
-                                val isSelected = uiState.preferences.sortOrder == order
-                                DropdownMenuItem(
-                                    text = {
-                                        Text(
-                                            text = order.title,
-                                            style = MaterialTheme.typography.bodyMedium.copy(
-                                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-                                            ),
-                                            color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
-                                        )
-                                    },
-                                    trailingIcon = if (isSelected) {
-                                        {
-                                            Icon(
-                                                imageVector = Icons.Default.Check,
-                                                contentDescription = null,
-                                                tint = MaterialTheme.colorScheme.primary,
-                                                modifier = Modifier.size(18.dp)
-                                            )
-                                        }
-                                    } else null,
-                                    onClick = {
-                                        haptics.pop()
-                                        onAction(HomeUiAction.OnSetSortOrder(order))
-                                        showSortMenu = false
-                                    }
-                                )
-                            }
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.width(4.dp))
-
-                    // Calendar History Action Button
-                    IconButton(
-                        onClick = {
-                            haptics.tick()
-                            onAction(HomeUiAction.OnHistoryClick)
-                        },
-                        modifier = Modifier.size(36.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.CalendarMonth,
-                            contentDescription = "Activity History",
-                            tint = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.size(22.dp)
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.width(4.dp))
-
-                    // Settings Action Button
-                    IconButton(
-                        onClick = {
-                            haptics.tick()
-                            onAction(HomeUiAction.OnSettingsClick)
-                        },
-                        modifier = Modifier.size(36.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Settings,
-                            contentDescription = "Settings",
-                            tint = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.size(22.dp)
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.width(6.dp))
-
-                    Surface(
-                        shape = RoundedCornerShape(20.dp),
-                        color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                        modifier = Modifier
-                            .padding(end = 12.dp)
-                            .clip(RoundedCornerShape(20.dp))
-                            .clickable {
-                                haptics.tick()
-                                showAuthSheet = true
-                            }
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = if (uiState.authState.isAuthenticated) Icons.Default.AccountCircle else Icons.Outlined.AccountCircle,
-                                contentDescription = "Profile",
-                                tint = if (uiState.authState.isAuthenticated) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.size(20.dp)
-                            )
-
-                            if (!uiState.authState.isAuthenticated) {
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(
-                                    text = "Sign in",
-                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                                    color = MaterialTheme.colorScheme.primary
-                                )
-                            }
-                        }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background
-                )
+            HomeTopBar(
+                authState = uiState.authState,
+                isSyncPending = uiState.isSyncPending,
+                currentSortOrder = uiState.preferences.sortOrder,
+                onSortSelected = { onAction(HomeUiAction.OnSetSortOrder(it)) },
+                onAuthClick = { showAuthSheet = true },
+                onHistoryClick = { onAction(HomeUiAction.OnHistoryClick) },
+                onSettingsClick = { onAction(HomeUiAction.OnSettingsClick) }
             )
         },
-        floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
                     haptics.pop()
                     showAddDialog = true
                 },
-                shape = RoundedCornerShape(currentRadius),
-                elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 6.dp),
-                modifier = Modifier.size(68.dp)
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                shape = RoundedCornerShape(currentRadius * 0.75f),
+                elevation = FloatingActionButtonDefaults.elevation(4.dp, 8.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add Counter",
-                    modifier = Modifier.size(32.dp)
+                    contentDescription = "Add Counter"
                 )
             }
         }
     ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ) {
-            if (uiState.isLoading) {
-                // Initial load
-            } else if (uiState.counters.isEmpty()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(32.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(100.dp)
-                            .clip(RoundedCornerShape(currentRadius * 1.3f))
-                            .background(MaterialTheme.colorScheme.primaryContainer),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.InvertColors,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(52.dp)
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(24.dp))
-
-                    Text(
-                        text = stringResource(id = R.string.no_counters_title),
-                        style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Text(
-                        text = stringResource(id = R.string.no_counters_desc),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
-                    )
-                }
-            } else {
-                val columnCount = if (uiState.preferences.gridLayout == GridLayoutMode.ONE_COLUMN) 1 else 2
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(columnCount),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 100.dp),
-                    horizontalArrangement = Arrangement.spacedBy(14.dp),
-                    verticalArrangement = Arrangement.spacedBy(14.dp),
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    items(uiState.counters, key = { it.id }) { counter ->
-                        BentoCounterCard(
-                            counter = counter,
-                            onClick = { onAction(HomeUiAction.OnCounterClick(counter.id)) },
-                            onIncrement = { onAction(HomeUiAction.OnIncrement(counter.id)) },
-                            onDecrement = { onAction(HomeUiAction.OnDecrement(counter.id)) },
-                            modifier = Modifier.animateItem()
-                        )
-                    }
-                }
-            }
+        if (uiState.counters.isEmpty()) {
+            HomeEmptyState(modifier = Modifier.padding(paddingValues))
+        } else {
+            HomeCounterGrid(
+                counters = uiState.counters,
+                gridLayoutMode = uiState.preferences.gridLayout,
+                onCounterClick = { onAction(HomeUiAction.OnCounterClick(it)) },
+                onIncrement = { id -> onAction(HomeUiAction.OnIncrement(id)) },
+                onDecrement = { id -> onAction(HomeUiAction.OnDecrement(id)) },
+                modifier = Modifier.padding(paddingValues)
+            )
         }
     }
 
     if (showAddDialog) {
-        val nextDefaultColor = uiState.counters.firstOrNull()?.colorToken?.nextColor() ?: ColorToken.DYNAMIC_PRIMARY
         AddCounterBottomSheet(
-            defaultColorToken = nextDefaultColor,
+            defaultColorToken = ColorToken.DYNAMIC_PRIMARY,
             onDismiss = { showAddDialog = false },
             onConfirm = { title, initialCount, step, colorToken ->
                 onAction(

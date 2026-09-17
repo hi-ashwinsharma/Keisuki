@@ -1,4 +1,4 @@
-package com.hiashwinsharma.keisuki.core.ui
+package com.hiashwinsharma.keisuki.feature.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +22,7 @@ import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,6 +36,7 @@ import com.hiashwinsharma.keisuki.core.designsystem.LocalAppCornerRadius
 import com.hiashwinsharma.keisuki.core.designsystem.rememberExpressiveHaptics
 import com.hiashwinsharma.keisuki.core.model.Counter
 import com.hiashwinsharma.keisuki.core.model.SyncStatus
+import com.hiashwinsharma.keisuki.core.ui.RollingNumberText
 
 @Composable
 fun BentoCounterCard(
@@ -66,7 +68,6 @@ fun BentoCounterCard(
                 .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            // Header: Title and Sync Indicator
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -76,8 +77,9 @@ fun BentoCounterCard(
                     text = counter.title,
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold,
-                        color = colorToken.onContainerColor
+                        letterSpacing = (-0.25).sp
                     ),
+                    color = colorToken.onContainerColor,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f)
@@ -88,48 +90,50 @@ fun BentoCounterCard(
                         modifier = Modifier
                             .size(8.dp)
                             .clip(CircleShape)
-                            .background(colorToken.onContainerColor.copy(alpha = 0.6f))
+                            .background(colorToken.primaryColor)
                     )
                 }
             }
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Prominent Count with Rolling Number Transition
             RollingNumberText(
                 count = counter.count,
-                style = MaterialTheme.typography.displayMedium.copy(
-                    fontSize = 38.sp,
+                style = MaterialTheme.typography.headlineLarge.copy(
                     fontWeight = FontWeight.Black,
-                    letterSpacing = (-1.0).sp
+                    letterSpacing = (-1.5).sp,
+                    lineHeight = 44.sp
                 ),
                 color = colorToken.onContainerColor
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Step hint & Mini Action Buttons
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "±${counter.step}",
-                    style = MaterialTheme.typography.labelMedium.copy(
-                        color = colorToken.onContainerColor.copy(alpha = 0.85f),
-                        fontWeight = FontWeight.SemiBold
+                Surface(
+                    shape = RoundedCornerShape(currentRadius * 0.4f),
+                    color = colorToken.primaryColor.copy(alpha = 0.15f)
+                ) {
+                    Text(
+                        text = "±${counter.step}",
+                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
+                        color = colorToken.onContainerColor,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                     )
-                )
+                }
 
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     FilledTonalIconButton(
                         onClick = {
                             haptics.tick()
                             onDecrement()
                         },
                         colors = IconButtonDefaults.filledTonalIconButtonColors(
-                            containerColor = colorToken.onContainerColor.copy(alpha = 0.12f),
+                            containerColor = colorToken.primaryColor.copy(alpha = 0.2f),
                             contentColor = colorToken.onContainerColor
                         ),
                         modifier = Modifier.size(36.dp)
@@ -147,8 +151,8 @@ fun BentoCounterCard(
                             onIncrement()
                         },
                         colors = IconButtonDefaults.filledIconButtonColors(
-                            containerColor = colorToken.onContainerColor.copy(alpha = 0.22f),
-                            contentColor = colorToken.onContainerColor
+                            containerColor = colorToken.primaryColor,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
                         ),
                         modifier = Modifier.size(36.dp)
                     ) {

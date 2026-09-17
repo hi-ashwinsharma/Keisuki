@@ -7,14 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,17 +16,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.hiashwinsharma.keisuki.core.designsystem.LocalAppCornerRadius
 import com.hiashwinsharma.keisuki.feature.history.components.CounterPickerBottomSheet
 import com.hiashwinsharma.keisuki.feature.history.components.HistoryChartCard
+import com.hiashwinsharma.keisuki.feature.history.components.HistoryDatePickerDialog
 import com.hiashwinsharma.keisuki.feature.history.components.HistoryDateNavigator
 import com.hiashwinsharma.keisuki.feature.history.components.HistoryStatsBento
 import com.hiashwinsharma.keisuki.feature.history.components.HistoryTopBar
 import com.hiashwinsharma.keisuki.feature.history.components.historyActivityLogSection
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HistoryScreen(
     uiState: HistoryUiState,
@@ -148,7 +141,6 @@ fun HistoryScreen(
         }
     }
 
-    // Material 3 Modal Bottom Sheet for switching counter
     if (showCounterPickerSheet && !uiState.isLockedToCounter) {
         CounterPickerBottomSheet(
             availableCounters = uiState.availableCounters,
@@ -159,30 +151,11 @@ fun HistoryScreen(
         )
     }
 
-    // Material 3 Date Picker Dialog
     if (showDatePicker) {
-        val datePickerState = rememberDatePickerState(
-            initialSelectedDateMillis = uiState.selectedAnchorTimestamp
+        HistoryDatePickerDialog(
+            initialSelectedDateMillis = uiState.selectedAnchorTimestamp,
+            onDateSelected = { onAction(HistoryUiAction.OnSelectCustomDate(it)) },
+            onDismiss = { showDatePicker = false }
         )
-        DatePickerDialog(
-            onDismissRequest = { showDatePicker = false },
-            confirmButton = {
-                TextButton(onClick = {
-                    datePickerState.selectedDateMillis?.let { ms ->
-                        onAction(HistoryUiAction.OnSelectCustomDate(ms))
-                    }
-                    showDatePicker = false
-                }) {
-                    Text("Select", fontWeight = FontWeight.Bold)
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showDatePicker = false }) {
-                    Text("Cancel")
-                }
-            }
-        ) {
-            DatePicker(state = datePickerState)
-        }
     }
 }
