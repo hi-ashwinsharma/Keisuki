@@ -1,12 +1,37 @@
+# Android & Gradle
 *.iml
 .gradle
-/local.properties
 .idea/
 .kotlin/
 .DS_Store
 /build
-app/build/
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+*/local.properties
+android/.gradle/
+android/.idea/
+android/.kotlin/
+android/build/
+android/app/build/
+android/local.properties
+
+# Web & Node.js
+node_modules/
+.npm
+.pnpm-store
+dist/
+build/
+.next/
+out/
+.astro/
+.output/
+.vercel/
+.turbo/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local

@@ -154,18 +154,20 @@ cd Keisuki
 ### 2. Configure Firebase (Optional for Cloud Sync)
 1. Go to the [Firebase Console](https://console.firebase.google.com/) and create a new project.
 2. Add an Android app with package name `com.hiashwinsharma.keisuki`.
-3. Download the generated `google-services.json` file and place it in the `/app` directory:
+3. Download the generated `google-services.json` file and place it in the `/android/app` directory:
    ```bash
-   cp ~/Downloads/google-services.json app/
+   cp ~/Downloads/google-services.json android/app/
    ```
 4. Enable **Firestore Database** and **Authentication** (Google Sign-In & Anonymous) in your Firebase console.
 
 *(Note: Keisuki functions out-of-the-box in local offline mode without Firebase configured.)*
 
 ### 3. Build & Run
-Open the project in Android Studio or build directly from your terminal:
+Open the project (or `/android` directory) in Android Studio, or build directly from your terminal:
 
 ```bash
+cd android
+
 # Assemble Debug APK
 ./gradlew assembleDebug
 
@@ -182,40 +184,44 @@ Open the project in Android Studio or build directly from your terminal:
 
 ```text
 Keisuki/
-├── app/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/com/hiashwinsharma/keisuki/
-│   │   │   │   ├── core/
-│   │   │   │   │   ├── designsystem/   # Theme, Typography, Dynamic Shapes & Haptics
-│   │   │   │   │   ├── model/          # Counter, SyncStatus & ColorToken domains
-│   │   │   │   │   └── ui/             # Reusable UI widgets & custom Canvas Chart engine
-│   │   │   │   ├── data/
-│   │   │   │   │   ├── auth/           # Firebase & Credential Manager auth repository
-│   │   │   │   │   ├── local/          # Room DB, Counter entities & DAO interfaces
-│   │   │   │   │   ├── preferences/    # Ergonomics, Theme & Layout user preferences
-│   │   │   │   │   ├── remote/         # Firestore service & cloud synchronization
-│   │   │   │   │   └── sync/           # WorkManager periodic and debounced sync workers
-│   │   │   │   ├── feature/
-│   │   │   │   │   ├── auth/           # Auth bottom sheets & user sign-in flows
-│   │   │   │   │   ├── focus/          # Fullscreen focus mode & step controls
-│   │   │   │   │   ├── history/        # Time series chart canvas & stats bento
-│   │   │   │   │   ├── home/           # Bento grid counter cards & quick action controls
-│   │   │   │   │   └── settings/       # Theme, radius, ergonomics & data management
-│   │   │   │   ├── KeisukiApp.kt       # Application container & dependency bootstrap
-│   │   │   │   └── MainActivity.kt     # Single Activity entry point & Navigation host
-│   │   │   └── res/                    # Drawables, mipmaps, and string resources
-│   └── build.gradle.kts
-├── gradle/
-│   └── libs.versions.toml              # Centralized dependencies & plugins
+├── android/
+│   ├── app/
+│   │   ├── src/
+│   │   │   ├── main/
+│   │   │   │   ├── java/com/hiashwinsharma/keisuki/
+│   │   │   │   │   ├── core/
+│   │   │   │   │   │   ├── designsystem/   # Theme, Typography, Dynamic Shapes & Haptics
+│   │   │   │   │   │   ├── model/          # Counter, SyncStatus & ColorToken domains
+│   │   │   │   │   │   └── ui/             # Reusable UI widgets & custom Canvas Chart engine
+│   │   │   │   │   ├── data/
+│   │   │   │   │   │   ├── auth/           # Firebase & Credential Manager auth repository
+│   │   │   │   │   │   ├── local/          # Room DB, Counter entities & DAO interfaces
+│   │   │   │   │   │   ├── preferences/    # Ergonomics, Theme & Layout user preferences
+│   │   │   │   │   │   ├── remote/         # Firestore service & cloud synchronization
+│   │   │   │   │   │   └── sync/           # WorkManager periodic and debounced sync workers
+│   │   │   │   │   ├── feature/
+│   │   │   │   │   │   ├── auth/           # Auth bottom sheets & user sign-in flows
+│   │   │   │   │   │   ├── focus/          # Fullscreen focus mode & step controls
+│   │   │   │   │   │   ├── history/        # Time series chart canvas & stats bento
+│   │   │   │   │   │   ├── home/           # Bento grid counter cards & quick action controls
+│   │   │   │   │   │   └── settings/       # Theme, radius, ergonomics & data management
+│   │   │   │   │   ├── KeisukiApp.kt       # Application container & dependency bootstrap
+│   │   │   │   │   └── MainActivity.kt     # Single Activity entry point & Navigation host
+│   │   │   │   └── res/                    # Drawables, mipmaps, and string resources
+│   │   └── build.gradle.kts
+│   ├── gradle/
+│   │   └── libs.versions.toml              # Centralized dependencies & plugins
+│   ├── build.gradle.kts
+│   └── settings.gradle.kts
+├── web/                                    # Marketing and documentation website
 ├── .github/
-│   ├── workflows/                      # GitHub Actions CI pipeline
-│   ├── ISSUE_TEMPLATE/                 # Structured bug report & feature request forms
-│   └── pull_request_template.md        # Pull request submission template
-├── CONTRIBUTING.md                     # Contribution guidelines & coding conventions
-├── CODE_OF_CONDUCT.md                  # Contributor Covenant v2.1 standard
-├── SECURITY.md                         # Vulnerability disclosure & support policy
-└── LICENSE                             # GNU General Public License v3.0
+│   ├── workflows/                          # GitHub Actions CI pipeline
+│   ├── ISSUE_TEMPLATE/                     # Structured bug report & feature request forms
+│   └── pull_request_template.md            # Pull request submission template
+├── CONTRIBUTING.md                         # Contribution guidelines & coding conventions
+├── CODE_OF_CONDUCT.md                      # Contributor Covenant v2.1 standard
+├── SECURITY.md                             # Vulnerability disclosure & support policy
+└── LICENSE                                 # GNU General Public License v3.0
 ```
 
 ---

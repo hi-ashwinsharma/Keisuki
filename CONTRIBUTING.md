@@ -50,6 +50,7 @@ Feature requests are tracked as GitHub Issues. Provide:
 3. **Make your changes** cleanly with self-contained commits.
 4. **Run unit tests and verification**:
    ```bash
+   cd android
    ./gradlew test
    ./gradlew lintDebug
    ```
@@ -60,12 +61,13 @@ Feature requests are tracked as GitHub Issues. Provide:
 
 ## 💻 Development Setup
 
-- **IDE**: Android Studio Ladybug (2024.2+) or later.
+- **IDE**: Android Studio Ladybug (2024.2+) or later (open the root directory or the `/android` folder).
 - **JDK**: Java 17 (set in Android Studio `Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JDK`).
 - **Target Platform**: Android SDK 35 (Android 15), Min SDK 26 (Android 8.0).
 
 To build the debug APK from the command line:
 ```bash
+cd android
 ./gradlew assembleDebug
 ```
 
