@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Layers, Database, Cloud, Terminal } from 'lucide-react';
+---
+
+<BaseLayout
+  title="Documentation - Keisuki Architecture & Developer Guide"
+  description="Technical documentation for Keisuki: Android Architecture Components, Room SQLite schemas, debounced Firestore synchronization, and build guide."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-24">
+    <!-- Header (No pills above) -->
+    <div class="mb-12 border-b border-white/5 pb-8">
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+        Keisuki <span class="em-serif text-amber-400 text-4xl sm:text-6xl">Architecture</span> & Telemetry
+      </h1>
+      <p class="text-sm sm:text-base text-zinc-400 leading-relaxed">
+        Comprehensive guide to Keisuki's offline-first architecture, Room SQLite persistence, MVI action flows, and cloud sync protocol.
+      </p>
+    </div>
+
+    <!-- Content Sections -->
+    <div class="space-y-12 text-sm text-zinc-300 leading-relaxed">
+      
+      <!-- 1. System Architecture -->
+      <section class="p-8 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-xl bg-ruby-500/10 text-ruby-400">
+            <Layers className="w-5 h-5" />
+          </div>
+          <h2 class="text-xl font-bold text-white">1. Modern Android Architecture</h2>
+        </div>
+        <p>
+          Keisuki strictly follows official Google Android Architecture Guidelines utilizing unidirectional data flow (UDF) with MVI-inspired UI state handling:
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-xs text-zinc-400">
+          <li><strong>UI Layer:</strong> 100% Jetpack Compose with Material 3 Expressive shapes and custom Canvas drawings.</li>
+          <li><strong>Presentation:</strong> <code class="text-amber-300">ViewModel</code> managing immutable <code class="text-amber-300">StateFlow&lt;UiState&gt;</code> and handling explicit <code class="text-amber-300">UiAction</code> intents.</li>
+          <li><strong>Data Layer:</strong> Single source of truth managed by <code class="text-amber-300">CounterRepository</code> and <code class="text-amber-300">UserPreferencesRepository</code> (DataStore).</li>
+        </ul>
+      </section>
+
+      <!-- 2. Local Persistence (Room SQLite) -->
+      <section id="database" class="p-8 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-xl bg-amber-500/10 text-amber-400">
+            <Database className="w-5 h-5" />
+          </div>
+          <h2 class="text-xl font-bold text-white">2. Room SQLite Schema</h2>
+        </div>
+        <p>
+          All events and tallies are recorded locally in two primary relational tables:
+        </p>
+        <div class="bg-obsidian-950 p-4 rounded-2xl font-mono text-xs text-zinc-300 border border-white/5 space-y-2">
+          <div><strong class="text-amber-400">Table: counters</strong></div>
+          <div class="text-zinc-400 pl-4">id: String (PK) • title: String • count: Long • step: Long • colorToken: String • syncStatus: String</div>
+          <div class="pt-2"><strong class="text-ruby-400">Table: counter_events</strong></div>
+          <div class="text-zinc-400 pl-4">id: String (PK) • counterId: String • delta: Long • timestamp: Long • syncStatus: String</div>
+        </div>
+      </section>
+
+      <!-- 3. Cloud Sync Engine -->
+      <section id="sync" class="p-8 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400">
+            <Cloud className="w-5 h-5" />
+          </div>
+          <h2 class="text-xl font-bold text-white">3. Cloud Sync & Debouncing</h2>
+        </div>
+        <p>
+          To prevent excessive write volume to Google Firebase Firestore, all tap mutations pass through an in-memory <strong>1500ms debounce buffer</strong> before triggering remote mutations.
+        </p>
+        <p>
+          When offline, operations are marked <code class="text-amber-300">PENDING_SYNC</code> and automatically flushed upon network reconnection via Android <code class="text-amber-300">WorkManager (SyncWorker)</code>.
+        </p>
+      </section>
+
+      <!-- 4. Contributing -->
+      <section class="p-8 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-400">
+            <Terminal className="w-5 h-5" />
+          </div>
+          <h2 class="text-xl font-bold text-white">4. Contributing to Keisuki</h2>
+        </div>
+        <p>
+          We welcome contributions! Please follow the <a href="https://github.com/hi-ashwinsharma/Keisuki/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="text-amber-400 underline">CONTRIBUTING.md</a> guidelines and Conventional Commits specification.
+        </p>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>

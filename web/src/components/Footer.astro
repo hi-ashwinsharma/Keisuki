@@ -1,0 +1,74 @@
+---
+import { Github, Mail, ShieldCheck, Heart, Terminal } from 'lucide-react';
+---
+
+<footer class="w-full bg-obsidian-950 border-t border-white/5 py-14 px-4 sm:px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/5">
+      <!-- Brand & Mission -->
+      <div class="md:col-span-2 space-y-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-ruby-500 p-0.5">
+            <div class="w-full h-full bg-obsidian-950 rounded-[6px] flex items-center justify-center">
+              <span class="text-xs font-extrabold num-mono text-amber-400">K</span>
+            </div>
+          </div>
+          <span class="text-base font-bold text-white">Keisuki</span>
+        </div>
+        <p class="text-xs text-zinc-400 max-w-sm leading-relaxed">
+          Expressive, zero-latency multi-counter and habit tracking designed for privacy, tactile satisfaction, and deep telemetry.
+        </p>
+        <div class="flex items-center gap-2 text-xs text-zinc-500">
+          <span>Created by</span>
+          <a
+            href="https://github.com/hiashwinsharma"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-amber-400 hover:underline font-semibold"
+          >
+            Ashwin Sharma
+          </a>
+        </div>
+      </div>
+
+      <!-- Links: Product & Documentation -->
+      <div class="space-y-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-zinc-400">Documentation</span>
+        <ul class="space-y-2 text-xs text-zinc-400">
+          <li><a href="/docs" class="hover:text-amber-400 transition-colors">Architecture Overview</a></li>
+          <li><a href="/docs#database" class="hover:text-amber-400 transition-colors">Room SQLite Schema</a></li>
+          <li><a href="/docs#sync" class="hover:text-amber-400 transition-colors">Firestore Sync Engine</a></li>
+          <li><a href="/changelog" class="hover:text-amber-400 transition-colors">Release Changelog</a></li>
+        </ul>
+      </div>
+
+      <!-- Links: Open Source & Security -->
+      <div class="space-y-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-zinc-400">Open Source</span>
+        <ul class="space-y-2 text-xs text-zinc-400">
+          <li>
+            <a href="https://github.com/hi-ashwinsharma/Keisuki" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+              <Github className="w-3.5 h-3.5" />
+              <span>GitHub Repository</span>
+            </a>
+          </li>
+          <li><a href="/privacy" class="hover:text-amber-400 transition-colors">Privacy & Sovereignty</a></li>
+          <li><a href="https://github.com/hi-ashwinsharma/Keisuki/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition-colors">GNU GPLv3 License</a></li>
+          <li><a href="mailto:hiashwinsharma@gmail.com" class="hover:text-amber-400 transition-colors">Security Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-zinc-500 gap-3">
+      <span>&copy; {new Date().getFullYear()} Ashwin Sharma. Released under GNU General Public License v3.0.</span>
+      <div class="flex items-center gap-4">
+        <span>100% Offline-First</span>
+        <span>•</span>
+        <span>Zero Ads</span>
+        <span>•</span>
+        <span>Zero Trackers</span>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Lock, Database, EyeOff, Server } from 'lucide-react';
+---
+
+<BaseLayout
+  title="Privacy Policy - Keisuki Data Sovereignty Pledge"
+  description="Keisuki is 100% offline-first with zero tracking, zero third-party telemetry, and zero ads. Your data belongs exclusively to you."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-24">
+    <!-- Header (No pills above) -->
+    <div class="mb-12 border-b border-white/5 pb-8">
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+        Privacy & <span class="em-serif text-amber-400 text-4xl sm:text-6xl">Sovereignty</span> Pledge
+      </h1>
+      <p class="text-sm sm:text-base text-zinc-400 leading-relaxed">
+        Keisuki was created with a foundational principle: counting habits and tallies should be private, offline-first, and completely free of tracking.
+      </p>
+    </div>
+
+    <!-- Privacy Pillars Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <div class="p-6 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 space-y-3">
+        <div class="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 w-fit">
+          <Database className="w-5 h-5" />
+        </div>
+        <h3 class="text-base font-bold text-white">Local-First Storage</h3>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          All counter entities, event logs, and timestamp history are written directly to your device's encrypted Room SQLite database.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 space-y-3">
+        <div class="p-2.5 rounded-xl bg-ruby-500/10 text-ruby-400 w-fit">
+          <EyeOff className="w-5 h-5" />
+        </div>
+        <h3 class="text-base font-bold text-white">Zero Tracking or Ads</h3>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          There are no analytics SDKs, advertising trackers, or behavioral profiling mechanisms embedded in Keisuki.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 space-y-3">
+        <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 w-fit">
+          <Lock className="w-5 h-5" />
+        </div>
+        <h3 class="text-base font-bold text-white">Optional Cloud Sync</h3>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Cloud sync to Google Firebase Firestore is strictly optional. You can use Keisuki in full offline mode anonymously indefinitely.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 space-y-3">
+        <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 w-fit">
+          <Server className="w-5 h-5" />
+        </div>
+        <h3 class="text-base font-bold text-white">Open Source Copyleft</h3>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Licensed under GNU GPLv3. The entire source code is auditable by anyone in the public GitHub repository.
+        </p>
+      </div>
+    </div>
+
+    <!-- Policy Text -->
+    <div class="p-8 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 space-y-6 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+      <h2 class="text-lg font-bold text-white">Security Disclosures</h2>
+      <p>
+        If you discover any security issue or vulnerability, please report it responsibly by contacting <a href="mailto:hiashwinsharma@gmail.com" class="text-amber-400 underline">hiashwinsharma@gmail.com</a>. We will respond within 48 hours.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

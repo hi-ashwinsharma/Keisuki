@@ -1,0 +1,76 @@
+---
+import CornerRadiusSlider from './isles/CornerRadiusSlider';
+import SyncVisualizer from './isles/SyncVisualizer';
+import ErgonomicsToggle from './isles/ErgonomicsToggle';
+import HapticsWaveVisualizer from './isles/HapticsWaveVisualizer';
+import InteractiveChart from './isles/InteractiveChart';
+import { ShieldCheck } from 'lucide-react';
+---
+
+<section id="features" class="py-24 px-4 sm:px-6 relative">
+  <div class="max-w-6xl mx-auto">
+    
+    <!-- Section Title (No pills above) -->
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+        Designed for <span class="em-serif text-ruby-400 text-4xl sm:text-6xl">depth</span>, built for <span class="em-serif text-amber-400 text-4xl sm:text-6xl">speed</span>.
+      </h2>
+      <p class="text-sm sm:text-base text-zinc-400 leading-relaxed">
+        Explore the core engineering pillars behind Keisuki—from custom Canvas chart scrubbers to zero-latency Room SQLite storage and ergonomic hand layouts.
+      </p>
+    </div>
+
+    <!-- Bento Grid Showcase -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Chart Telemetry (Spans 2 columns on desktop) -->
+      <div id="telemetry" class="md:col-span-2">
+        <InteractiveChart client:visible />
+      </div>
+
+      <!-- Corner Radius Slider -->
+      <div class="col-span-1">
+        <CornerRadiusSlider client:visible />
+      </div>
+
+      <!-- Offline-First Sync Engine -->
+      <div class="col-span-1">
+        <SyncVisualizer client:visible />
+      </div>
+
+      <!-- Ergonomics Single-Hand Reach -->
+      <div class="col-span-1">
+        <ErgonomicsToggle client:visible />
+      </div>
+
+      <!-- Tactile Haptics Waveform -->
+      <div class="col-span-1">
+        <HapticsWaveVisualizer client:visible />
+      </div>
+
+    </div>
+
+    <!-- Privacy & Open Source Card (Solid color, no gradient) -->
+    <div class="mt-8 p-8 rounded-3xl glass-panel border border-white/10 bg-obsidian-850 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 flex-shrink-0">
+          <ShieldCheck className="w-6 h-6" />
+        </div>
+        <div>
+          <h4 class="text-base font-bold text-white mb-1">Zero-Tracking Privacy Pledge</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed max-w-xl">
+            Your data belongs exclusively to you. All counts reside locally on your device in encrypted SQLite tables. Cloud synchronization is entirely optional and debounced.
+          </p>
+        </div>
+      </div>
+
+      <a
+        href="/privacy"
+        class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-zinc-200 transition-all whitespace-nowrap hover:border-white/20"
+      >
+        Read Privacy Policy
+      </a>
+    </div>
+
+  </div>
+</section>

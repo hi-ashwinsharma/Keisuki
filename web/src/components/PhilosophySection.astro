@@ -1,0 +1,22 @@
+---
+import InteractiveCounterDemo from './isles/InteractiveCounterDemo';
+---
+
+<section id="showcase" class="py-24 px-4 sm:px-6 relative">
+  <div class="max-w-6xl mx-auto">
+    <!-- Story Hook Header (No pills above) -->
+    <div class="max-w-2xl mx-auto text-center mb-16">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+        Every habit begins with a <span class="em-serif text-amber-400 text-4xl sm:text-6xl">single</span> conscious tap.
+      </h2>
+      <p class="text-sm sm:text-base text-zinc-400 leading-relaxed">
+        Most counters are either rigid spreadsheets or bloated trackers. Keisuki strips away friction, delivering spring-physics feedback and focused micro-interactions right at your fingertips.
+      </p>
+    </div>
+
+    <!-- Live Interactive Simulator Widget Isle -->
+    <div class="relative z-10">
+      <InteractiveCounterDemo client:visible />
+    </div>
+  </div>
+</section>

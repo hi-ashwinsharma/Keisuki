@@ -1,0 +1,52 @@
+---
+import { Download, ArrowRight } from 'lucide-react';
+---
+
+<section class="relative pt-24 pb-20 md:pt-32 md:pb-28 px-4 sm:px-6 overflow-hidden">
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <!-- Main Headline with Serif Word Emphasis (No pills above) -->
+    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
+      Count what <span class="em-serif font-normal text-amber-400 text-5xl sm:text-7xl md:text-8xl">truly</span> matters, with <span class="em-serif font-normal text-ruby-400 text-5xl sm:text-7xl md:text-8xl">expressive</span> precision.
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+      An offline-first tally and habit analytics engine engineered with Material 3 Expressive shapes, tactile haptics, and zero-latency local SQLite persistence.
+    </p>
+
+    <!-- Action Buttons (Solid colors, zero gradients) -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="#download"
+        class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-ruby-500 hover:bg-ruby-600 text-white font-bold text-sm transition-all duration-150 flex items-center justify-center gap-2.5 active:scale-95"
+      >
+        <Download className="w-4 h-4" />
+        <span>Download APK (v1.0)</span>
+      </a>
+
+      <a
+        href="#showcase"
+        class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-zinc-200 font-semibold text-sm border border-white/10 hover:border-white/20 transition-all duration-150 flex items-center justify-center gap-2 backdrop-blur-md active:scale-95"
+      >
+        <span>Test Live Simulator</span>
+        <ArrowRight className="w-4 h-4 text-amber-400" />
+      </a>
+    </div>
+
+    <!-- Key Metrics Section -->
+    <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto mt-16 pt-8 border-t border-white/5 text-xs text-zinc-400">
+      <div class="flex flex-col items-center">
+        <span class="num-mono font-bold text-white text-base">0ms</span>
+        <span class="text-[11px] text-zinc-500 mt-0.5">Local SQLite Latency</span>
+      </div>
+      <div class="flex flex-col items-center border-x border-white/5 px-2">
+        <span class="num-mono font-bold text-amber-400 text-base">0 to 32dp</span>
+        <span class="text-[11px] text-zinc-500 mt-0.5">Dynamic Corner Curve</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="num-mono font-bold text-ruby-400 text-base">100%</span>
+        <span class="text-[11px] text-zinc-500 mt-0.5">Offline-First Privacy</span>
+      </div>
+    </div>
+  </div>
+</section>
