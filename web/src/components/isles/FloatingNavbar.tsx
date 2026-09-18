@@ -26,9 +26,14 @@ export default function FloatingNavbar() {
       >
         {/* Brand Logo */}
         <a href="/" className="flex items-center gap-2.5 group">
-          <div className="w-7 h-7 rounded-xl bg-ruby-500 p-0.5 shadow-md group-hover:scale-105 transition-transform flex-shrink-0">
-            <div className="w-full h-full bg-obsidian-950 rounded-[9px] flex items-center justify-center">
-              <span className="text-xs font-extrabold num-mono text-amber-400">K</span>
+          <div className="w-7 h-7 rounded-xl bg-gradient-to-tr from-ruby-500 to-amber-400 p-[1px] shadow-md group-hover:scale-105 transition-transform flex-shrink-0">
+            <div className="w-full h-full bg-obsidian-950 rounded-[11px] p-1 flex items-center justify-center">
+              <svg className="w-full h-full text-white" viewBox="50 44 412 424" fill="currentColor">
+                <rect x="136" y="130" width="26" height="252" rx="4" />
+                <rect x="180" y="130" width="26" height="252" rx="4" />
+                <rect x="224" y="130" width="26" height="252" rx="4" />
+                <path d="M 250,230 L 350,130 H 376 V 156 L 276,256 L 376,356 V 382 H 350 L 250,282 Z" />
+              </svg>
             </div>
           </div>
           <span className="text-sm font-bold tracking-tight text-white group-hover:text-amber-300 transition-colors">

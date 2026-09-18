@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
     <!-- Tally Bar 1 -->
     <path
         android:fillColor="#FFFFFFFF"
-        android:pathData="M28.5,27.5h5.5v53h-5.5z" />
+        android:pathData="M136,130h26v252h-26z" />
     <!-- Tally Bar 2 -->
     <path
         android:fillColor="#FFFFFFFF"
-        android:pathData="M37.8,27.5h5.5v53h-5.5z" />
+        android:pathData="M180,130h26v252h-26z" />
     <!-- Tally Bar 3 (Spine) -->
     <path
         android:fillColor="#FFFFFFFF"
-        android:pathData="M47.1,27.5h5.5v53h-5.5z" />
+        android:pathData="M224,130h26v252h-26z" />
     <!-- Stepped Chevron Wing -->
     <path
         android:fillColor="#FFFFFFFF"
-        android:pathData="M52.6,48.5L73.6,27.5H79.1V33.0L58.1,54.0L79.1,75.0V80.5H73.6L52.6,59.5Z" />
+        android:pathData="M250,230L350,130H376V156L276,256L376,356V382H350L250,282Z" />
 </vector>

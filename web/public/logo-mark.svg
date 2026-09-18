@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Tally Bar 1 -->
+  <rect x="136" y="130" width="26" height="252" rx="4" fill="currentColor"/>
+  <!-- Tally Bar 2 -->
+  <rect x="180" y="130" width="26" height="252" rx="4" fill="currentColor"/>
+  <!-- Tally Bar 3 (Spine) -->
+  <rect x="224" y="130" width="26" height="252" rx="4" fill="currentColor"/>
+  <!-- Stepped Chevron Wing -->
+  <path d="M 250,230 L 350,130 H 376 V 156 L 276,256 L 376,356 V 382 H 350 L 250,282 Z" fill="currentColor"/>
+</svg>
