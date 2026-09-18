@@ -1,22 +1,74 @@
 ---
 import InteractiveCounterDemo from './isles/InteractiveCounterDemo';
+import { Zap, Vibrate, Database, Sparkles } from 'lucide-react';
 ---
 
-<section id="showcase" class="min-h-[92vh] py-28 px-4 sm:px-8 relative flex flex-col justify-center border-t border-white/5 bg-obsidian-950/40">
+<section id="showcase" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 relative flex flex-col justify-center border-t border-white/5 bg-obsidian-950/60">
   <div class="max-w-7xl mx-auto w-full">
-    <!-- Story Hook Header -->
-    <div class="max-w-3xl mx-auto text-center mb-16">
-      <h2 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-5">
-        Every habit begins with a <span class="em-serif text-amber-400 text-4xl sm:text-6xl md:text-7xl">single</span> conscious tap.
-      </h2>
-      <p class="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-        Most counters are either rigid spreadsheets or bloated trackers. Keisuki strips away friction, delivering spring-physics feedback and focused micro-interactions right at your fingertips.
-      </p>
-    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      <!-- Left Column: Storytelling & Feature Breakdown -->
+      <div class="lg:col-span-6 space-y-8">
+        <div>
+          <h2 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.15] mb-5">
+            Every habit begins with a <span class="em-serif text-amber-400 text-4xl sm:text-6xl md:text-7xl">single</span> conscious tap.
+          </h2>
+          <p class="text-base sm:text-lg text-zinc-400 leading-relaxed">
+            Most counters are either rigid spreadsheets or bloated trackers. Keisuki strips away friction, delivering spring-physics feedback and focused micro-interactions right at your fingertips.
+          </p>
+        </div>
 
-    <!-- Live Interactive Simulator Widget Isle -->
-    <div class="relative z-10 max-w-lg mx-auto w-full">
-      <InteractiveCounterDemo client:visible />
+        <!-- 3 Key Pillars -->
+        <div class="space-y-4 pt-2">
+          
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+            <div class="p-2 rounded-xl bg-ruby-500/10 text-ruby-400 flex-shrink-0 mt-0.5">
+              <Zap className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-white mb-1">Spring Motion & Roll Digits</h3>
+              <p class="text-xs text-zinc-400 leading-relaxed">
+                Physics-based tactile morph buttons and rolling number typography keep tallying fluid and satisfying.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+            <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400 flex-shrink-0 mt-0.5">
+              <Vibrate className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-white mb-1">Synthesized Tactile Audio</h3>
+              <p class="text-xs text-zinc-400 leading-relaxed">
+                Subtle micro-frequency audio ticks provide physical mechanical feedback directly inside your browser.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+            <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 flex-shrink-0 mt-0.5">
+              <Database className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-white mb-1">Zero-Latency Local SQLite</h3>
+              <p class="text-xs text-zinc-400 leading-relaxed">
+                Every event writes instantly to on-device storage with zero network delays or tracking.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="text-xs text-zinc-500 italic">
+          Try tapping the counter button or changing step sizes on the right to test the physics.
+        </p>
+      </div>
+
+      <!-- Right Column: Architectural Wireframe Phone Mockup -->
+      <div class="lg:col-span-6 flex justify-center items-center">
+        <InteractiveCounterDemo client:visible />
+      </div>
+
     </div>
   </div>
 </section>
