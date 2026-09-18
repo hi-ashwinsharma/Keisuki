@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import Navbar from '../components/Navbar.astro';
+import FloatingNavbar from '../components/isles/FloatingNavbar';
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -41,10 +41,10 @@ const {
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="/og-image.png" />
   </head>
-  <body class="bg-obsidian-900 text-ivory-200 selection:bg-ruby-500 selection:text-white antialiased">
-    <Navbar />
+  <body class="bg-obsidian-900 text-ivory-200 selection:bg-ruby-500 selection:text-white antialiased min-h-screen flex flex-col justify-between">
+    <FloatingNavbar client:load />
     
-    <main>
+    <main class="flex-grow">
       <slot />
     </main>
 

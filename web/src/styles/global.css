@@ -18,7 +18,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Subtle Film Grain Noise Texture */
+/* Rich Film Grain Noise Texture (Stronger opacity & contrast) */
 body {
   position: relative;
   min-height: 100vh;
@@ -35,19 +35,19 @@ body::before {
   height: 100vh;
   pointer-events: none;
   z-index: 99;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.075;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #0a0a0c;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f1f2a;
+  background: #22222e;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -56,18 +56,10 @@ body::before {
 
 /* Glassmorphic Container Utility */
 .glass-panel {
-  background: rgba(18, 18, 22, 0.7);
+  background: rgba(18, 18, 22, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 248, 240, 0.08);
-}
-
-.glass-panel-glow {
-  background: rgba(22, 22, 28, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 46, 99, 0.2);
-  box-shadow: 0 0 35px -5px rgba(255, 46, 99, 0.12);
 }
 
 /* Editorial Serif Emphasis Utility */
@@ -82,4 +74,9 @@ body::before {
 .num-mono {
   font-family: 'JetBrains Mono', monospace;
   font-feature-settings: 'tnum' on, 'zero' on;
+}
+
+/* Fluid transition utilities */
+.spring-transition {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
