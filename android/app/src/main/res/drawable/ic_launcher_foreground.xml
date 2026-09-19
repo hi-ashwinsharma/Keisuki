@@ -4,20 +4,26 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Tally Bar 1 -->
-    <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M28.5,27.5h5.5v53h-5.5z" />
-    <!-- Tally Bar 2 -->
-    <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M37.8,27.5h5.5v53h-5.5z" />
-    <!-- Tally Bar 3 (Spine) -->
-    <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M47.1,27.5h5.5v53h-5.5z" />
-    <!-- Stepped Chevron Wing -->
-    <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M52.6,48.5L73.6,27.5H79.1V33.0L58.1,54.0L79.1,75.0V80.5H73.6L52.6,59.5Z" />
+    <group
+        android:scaleX="0.65"
+        android:scaleY="0.65"
+        android:pivotX="53.8"
+        android:pivotY="54.0">
+        <!-- Tally Bar 1 -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M28.5,27.5h5.5v53h-5.5z" />
+        <!-- Tally Bar 2 -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M37.8,27.5h5.5v53h-5.5z" />
+        <!-- Tally Bar 3 (Spine) -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M47.1,27.5h5.5v53h-5.5z" />
+        <!-- Stepped Chevron Wing -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M52.6,48.5L73.6,27.5H79.1V33.0L58.1,54.0L79.1,75.0V80.5H73.6L52.6,59.5Z" />
+    </group>
 </vector>
